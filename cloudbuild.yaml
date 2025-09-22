@@ -1,0 +1,10 @@
+steps:
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['install']
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    gcloud compute ssh instance-20250922-062947 --zone=asia-south1-a  --command='bash -s' < ./deploy.sh
