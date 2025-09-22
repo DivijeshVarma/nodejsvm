@@ -8,3 +8,6 @@ steps:
   - '-c'
   - |
     gcloud compute ssh instance-20250922-062947 --zone=asia-south1-a  --command='bash -s' < ./deploy.sh
+
+options:
+  logging: CLOUD_LOGGING_ONLY
