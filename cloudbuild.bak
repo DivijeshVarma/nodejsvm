@@ -1,0 +1,27 @@
+steps:
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['install']
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Connect to instance
+  entrypoint: '/bin/sh'
+  args:
+  - '-c'
+  - |
+    # 1. Retrieve the private SSH key from Secret Manager
+    mkdir -p /root/.ssh && \\
+    gcloud secrets versions access latest --secret=cloud-build-ssh-key > /root/.ssh/id_rsa && \\
+    chmod 600 /root/.ssh/id_rsa
+    
+    gcloud secrets versions access latest --secret=cloud-build-ssh-key-pub > /root/.ssh/id_rsa.pub && \\
+    chmod 600 /root/.ssh/id_rsa.pub && \\
+    set -x && \\
+
+    # 2. Use the private key to SSH into the VM and run the deployment script
+    gcloud compute ssh instance-20250922-062947 \
+        --zone=asia-south1-a \
+        --ssh-key-file=/root/.ssh/id_rsa \
+        --command='bash -s' < ./deploy.sh
+
+options:
+  logging: CLOUD_LOGGING_ONLY
