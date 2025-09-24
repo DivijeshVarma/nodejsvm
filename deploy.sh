@@ -3,7 +3,7 @@
 # A simple script to deploy a Node.js application to a Linux VM by cloning a git repository.
 
 # Set the target directory for the application
-APP_DIR="/var/www/nodejsvm"
+APP_DIR="/home/divijesh"
 REPO_URL="https://github.com/DivijeshVarma/nodejsvm.git"
 
 echo "Beginning deployment..."
