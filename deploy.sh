@@ -22,6 +22,10 @@ git clone "$REPO_URL" "$APP_DIR"
 # Navigate into the application directory
 cd "$APP_DIR"
 
+# Install Node.js dependencies
+echo "Installing Node.js dependencies..."
+npm install
+
 # deploy app
 node app deploy &
 
