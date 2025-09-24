@@ -24,7 +24,7 @@ cd "$APP_DIR"
 
 # Install Node.js dependencies
 echo "Installing Node.js dependencies..."
-npm install
+sudo npm install
 
 # deploy app
 node app deploy &
